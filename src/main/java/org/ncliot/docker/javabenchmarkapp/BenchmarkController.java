@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.concurrent.ThreadLocalRandom;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +49,13 @@ public class BenchmarkController {
 
     @RequestMapping("/primecheck")
     public String checkPrime() {
-        long num=86028121;
-        return checkPrime(num);
+        int max_num=86028121;
+        // Generate a random number between 0 and max_num
+//        int randomNum = ThreadLocalRandom.current().nextInt(0, max_num + 1);
+//         if (randomNum%2==0){
+//             randomNum = randomNum -  1;
+//         }
+        return checkPrime(max_num);
     }
 
 
