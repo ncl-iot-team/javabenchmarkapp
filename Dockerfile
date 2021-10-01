@@ -1,7 +1,12 @@
-FROM openjdk:8-jdk-alpine
-RUN addgroup -S spring && adduser -S spring -G spring
+FROM openjdk:8-jdk-buster
+RUN adduser spring
+RUN usermod -aG spring spring
+COPY pom.xml /
+COPY src /src
+RUN apt update
+RUN apt install maven -y
+WORKDIR /
+RUN mvn install
 USER spring:spring
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","/target/javabenchmarkapp-0.0.1-SNAPSHOT.jar"]
 
